@@ -1,0 +1,16 @@
+These are the inputs and outputs for an HOD model with central alignment for central galaxies, and constant radial alignment for satellite galaxies. They are structured as follows:
+
+inputs:
+array of shape (N, 2) where each row is a single data point and the elements of the row are the alignment strengths. The first element of a row is the central alignment strength, and the second element is the satellite alignment strength.
+For example:
+[[0, 0.1],
+[0.2, 0.3],
+[0.4, 0.5]]
+The first row has a cental slignment strength of 0 and a satellite alignment strenght of 0.1, while the second data point has a central alignment strength of 0.2 and a satellite alignment strength of 0.3.
+
+Outputs:
+array of shape (N, 3, 14). Again, each row is a data point, as usual, but the three elements in that data point are each an array with a correlation function output. The 3 items in a single data point are the position-position, position-orientation, and orientation-orientation correlations functions respectively. Each of these correlation functions has 14 points corresponding to the values in rbin_centers given by the following two lines of python code:
+rbins = np.logspace(-1,1.2,15)
+rbin_centers = (rbins[:-1]+rbins[1:])/2.0
+
+I've given these 3 since they are the most basic correlations to check, but there are 24 other combinations we can use if needed. Whether you want to train a single model for a single correlation function, or find a way to train one model to predict all, hopefully the outputs provided will be enough for what you need.
